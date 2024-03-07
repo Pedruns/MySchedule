@@ -6,6 +6,33 @@
     <title>tarea</title>
 </head>
 <body>
-    <h1>Este es el index</h1>
+    <a href="/tarea/create">Crear nueva tarea</a>
+    <h1>Lista de tareas</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Fecha de cierre</th>
+                <th>Tiempo estimado (horas)</th>
+                <th>Estatus</th>
+                <th>Prioridad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($tareas as $tarea)
+            <tr>
+                <td>{{ $tarea->nombre }}</td>
+                <td>{{ $tarea->descripcion }}</td>
+                <td>{{ $tarea->fecha_final }}</td>
+                <td>{{ $tarea->tiempo_estimado }}</td>
+                <td>{{ $tarea->estatus }}</td>
+                <td>{{ $tarea->prioridad }}</td>
+                <td> <a href="{{ route('tarea.show', $tarea )}}"></a></td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </body>
 </html>
