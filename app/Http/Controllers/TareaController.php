@@ -47,7 +47,7 @@ class TareaController extends Controller
      */
     public function show(Tarea $tarea)
     {
-        return view('tareas.tareaShow', compact('tareas'));
+        return view('tareas.tareaShow', compact('tarea'));
     }
 
     /**
@@ -55,7 +55,7 @@ class TareaController extends Controller
      */
     public function edit(Tarea $tarea)
     {
-        //
+        return view('tareas.tareaUpdate', compact('tarea'));
     }
 
     /**
@@ -63,7 +63,15 @@ class TareaController extends Controller
      */
     public function update(Request $request, Tarea $tarea)
     {
-        //
+        $tarea->nombre = $request->nombre;
+        $tarea->descripcion = $request->descripcion;
+        $tarea->fecha_final = $request->fecha_final;
+        $tarea->tiempo_estimado = $request->tiempo_estimado;
+        $tarea->estatus = $request->estatus;
+        $tarea->prioridad = $request->prioridad;
+        $tarea->save();
+        
+        return redirect()->route('tarea.show', $tarea);
     }
 
     /**
@@ -71,6 +79,7 @@ class TareaController extends Controller
      */
     public function destroy(Tarea $tarea)
     {
-        //
+        $tarea->delete();
+        return redirect()->route('tarea.index');
     }
 }

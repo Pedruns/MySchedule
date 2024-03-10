@@ -29,7 +29,15 @@
                 <td>{{ $tarea->tiempo_estimado }}</td>
                 <td>{{ $tarea->estatus }}</td>
                 <td>{{ $tarea->prioridad }}</td>
-                <td> <a href="{{ route('tarea.show', $tarea )}}"></a></td>
+                <td> 
+                    <a href="{{ route('tarea.show', $tarea )}}">Ver</a> |
+                     <a href="{{ route('tarea.edit', $tarea ) }}">Editar</a> | 
+                    <form action="{{route('tarea.destroy', $tarea)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" value="Eliminar">
+                    </form>
+                </td>
             </tr>
             @endforeach
         </tbody>

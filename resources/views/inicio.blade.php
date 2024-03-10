@@ -6,7 +6,7 @@
     <title>Inicio</title>
 </head>
 <body>
-    <a href="/tarea/create">Crear nueva tarea</a>
+    <a href="/tarea">Ver tareas</a>
     <h1>Este es el inicio</h1>
 </body>
 </html>
