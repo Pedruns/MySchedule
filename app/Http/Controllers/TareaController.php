@@ -39,7 +39,7 @@ class TareaController extends Controller
         $tarea->prioridad = $request->prioridad;
         $tarea->save();
         
-        return redirect()->back();
+        return redirect()->route('tarea.index');
     }
 
     /**
