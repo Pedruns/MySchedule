@@ -45,15 +45,19 @@
         </fieldset>
         <fieldset>
             <legend>Estatus</legend>
-            <label><input @selected(old('estatus')=='hacer') id="hacer" type="checkbox" name="estatus" value="hacer"> Hacer</label>
-            <label><input @selected(old('estatus')=='haciendo') id="haciendo" type="checkbox" name="estatus" value="haciendo"> Haciendo</label>
-            <label><input @selected(old('estatus')=='hecho') id="hecho" type="checkbox" name="estatus" value="hecho"> Hecho</label>
+            <select name="estatus" id="estatus">
+                <option value="hacer" @selected(old('estatus')=='hacer')>Hacer</option>
+                <option value="haciendo" @selected(old('estatus')=='haciendo')>Haciendo</option>
+                <option value="hecho"@selected(old('estatus')=='hecho')>Hecho</option>
+            </select>
         </fieldset>
         <fieldset>
             <legend>Prioridad</legend>
-            <label><input @selected(old('prioridad')=='baja') id="baja" type="checkbox" name="prioridad" value="baja"> Baja</label>
-            <label><input @selected(old('prioridad')=='media') id="media" type="checkbox" name="prioridad" value="media"> Media</label>
-            <label><input @selected(old('prioridad')=='alta') id="alta" type="checkbox" name="prioridad" value="alta"> Alta</label>
+            <select name="prioridad" id="prioridad">
+                <option value="baja" @selected(old('prioridad')=='baja')>Baja</option>
+                <option value="media" @selected(old('prioridad')=='media')>Media</option>
+                <option value="alta" @selected(old('prioridad')=='alta')>Alta</option>
+            </select>
         </fieldset>
         <input type="submit" value="Enviar">
     </form>

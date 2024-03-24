@@ -33,15 +33,21 @@
         </fieldset>
         <fieldset>
             <legend>Estatus</legend>
-            <label><input id="hacer" type="checkbox" name="estatus" value="hacer" @selected(old('estatus')=='hacer' ?? $tarea->estatus =='hacer')> Hacer</label>
-            <label><input id="haciendo" type="checkbox" name="estatus" value="haciendo" @selected(old('estatus')=='haciendo' ?? $tarea->estatus =='haciendo')> Haciendo</label>
-            <label><input id="hecho" type="checkbox" name="estatus" value="hecho" @selected(old('estatus')=='hecho' ?? $tarea->estatus =='hecho')> Hecho</label>
+            <select name="estatus" id="estatus">
+                <option value="">---</option>
+                <option value="hacer" {{ old('estatus') == 'hacer' || $tarea->estatus == 'hacer' ? 'selected' : '' }}>Hacer</option>
+                <option value="haciendo" {{ old('estatus') == 'haciendo' || $tarea->estatus == 'haciendo' ? 'selected' : '' }}>Haciendo</option>
+                <option value="hecho" {{ old('estatus') == 'hecho' || $tarea->estatus == 'hecho' ? 'selected' : '' }}>Hecho</option>
+            </select>
         </fieldset>
         <fieldset>
             <legend>Prioridad</legend>
-            <label><input id="baja" type="checkbox" name="prioridad" value="baja" @selected(old('prioridad')=='baja' ?? $tarea->prioridad =='baja')> Baja</label>
-            <label><input id="media" type="checkbox" name="prioridad" value="media" @selected(old('prioridad')=='media' ?? $tarea->prioridad =='media')> Media</label>
-            <label><input id="alta" type="checkbox" name="prioridad" value="alta" @selected(old('prioridad')=='alta' ?? $tarea->prioridad =='alta')> Alta</label>
+            <select name="prioridad" id="prioridad">
+                <option value="">---</option>
+                <option value="baja" {{ old('prioridad') == 'baja' || $tarea->prioridad == 'baja' ? 'selected' : '' }}>Baja</option>
+                <option value="media" {{ old('prioridad') == 'media' || $tarea->prioridad == 'media' ? 'selected' : '' }}>Media</option>
+                <option value="alta" {{ old('prioridad') == 'alta' || $tarea->prioridad == 'alta' ? 'selected' : '' }}>Alta</option>
+            </select>
         </fieldset>
         <input type="submit" value="Enviar">
     </form>
