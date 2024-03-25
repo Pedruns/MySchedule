@@ -29,6 +29,14 @@ class TareaController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nombre'=>['required', 'string', 'max:50'],
+            'descripcion' => 'required|string|min:10',
+            'fecha_final' => 'required|date',
+            'tiempo_estimado' => 'required|numeric|min:0',
+            'estatus' => 'required', 
+            'prioridad' => 'required',
+        ]);
         //Guardar
         $tarea = new Tarea();
         $tarea->nombre = $request->nombre;
@@ -63,6 +71,14 @@ class TareaController extends Controller
      */
     public function update(Request $request, Tarea $tarea)
     {
+        $request->validate([
+            'nombre'=>['required', 'string', 'max:50'],
+            'descripcion' => 'required|string|min:10',
+            'fecha_final' => 'required|date',
+            'tiempo_estimado' => 'required|numeric|min:0',
+            'estatus' => 'required', 
+            'prioridad' => 'required',
+        ]);
         $tarea->nombre = $request->nombre;
         $tarea->descripcion = $request->descripcion;
         $tarea->fecha_final = $request->fecha_final;

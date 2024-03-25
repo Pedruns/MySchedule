@@ -20,7 +20,7 @@
         <fieldset>
             <legend>Fecha de cierre</legend>
             <label for="fecha_final"></label>
-            <input type="date" name="fecha_final" id="fecha_final" value="{{ old('fecha_fina;') ?? $tarea->fecha_final}}" required>
+            <input type="date" name="fecha_final" id="fecha_final" value="{{ old('fecha_final') ?? $tarea->fecha_final}}" required>
         </fieldset>
         <fieldset>
             <legend>Tiempo estimado (horas)</legend>

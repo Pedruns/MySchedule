@@ -25,7 +25,7 @@
         <fieldset>
             <legend>Fecha de cierre</legend>
             <label for="fecha_final"></label>
-            <input type="date" name="fecha_final" id="fecha_final" value="{{ old('fecha_fina;')}}" required>
+            <input type="date" name="fecha_final" id="fecha_final" value="{{ old('fecha_final')}}" required>
             @error('fecha_final')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
