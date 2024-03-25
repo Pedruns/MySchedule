@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarea</title>
-</head>
-<body>
+@extends('layouts.milayout')
+
+@section('contenido')
     <a href="/">salir</a>
     <h1>Crear nueva tarea</h1>
     @include('parciales.formError')
@@ -61,5 +56,4 @@
         </fieldset>
         <input type="submit" value="Enviar">
     </form>
-</body>
-</html>
+@endsection

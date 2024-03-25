@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
-</head>
-<body>
-    <a href="/tarea">Ver tareas</a>
-    <h1>Este es el inicio</h1>
-</body>
-</html>
+@extends('layouts.milayout')
+
+@section('contenido')
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+            <h5 class="card-title fw-semibold mb-4">En construccion...</h5>
+            <p class="mb-0">Pero ya puedes acceder al CRUD de tareas</p>
+            </div>
+        </div>
+    </div>
+@endsection

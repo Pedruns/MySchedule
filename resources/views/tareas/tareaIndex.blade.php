@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tarea</title>
-</head>
-<body>
+@extends('layouts.milayout')
+
+@section('contenido')
     <a href="/tarea/create">Crear nueva tarea</a>
     <h1>Lista de tareas</h1>
     <table>
@@ -42,5 +37,4 @@
             @endforeach
         </tbody>
     </table>
-</body>
-</html>
+@endsection

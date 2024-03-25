@@ -15,9 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome'); //inicio
+    return view('inicio'); //inicio
 });
+
 Route::resource('tarea', TareaController::class);
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
