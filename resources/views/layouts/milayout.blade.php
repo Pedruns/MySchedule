@@ -45,19 +45,19 @@
               <span class="hide-menu">Tareas</span>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="/tarea" aria-expanded="false">
+              <a class="sidebar-link" href="/clase" aria-expanded="false">
                 <span>
                   <i class="ti ti-article"></i>
                 </span>
-                <span class="hide-menu">Ver tareas</span>
+                <span class="hide-menu">Ver clases</span>
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="/tarea/create" aria-expanded="false">
+              <a class="sidebar-link" href="/clase/create" aria-expanded="false">
                 <span>
                   <i class="ti ti-alert-circle"></i>
                 </span>
-                <span class="hide-menu">Crear tarea</span>
+                <span class="hide-menu">Crear clase</span>
               </a>
             </li>
             <li class="nav-small-cap">

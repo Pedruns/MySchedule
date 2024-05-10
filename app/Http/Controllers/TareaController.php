@@ -2,26 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Clase;
 use App\Models\Tarea;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TareaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+
+    /*public function index($clase_id)
     {
         $tareas = Tarea::all();
+        *$tareas = Auth::clase()->tareas;
         return view('tareas.tareaIndex', compact('tareas'));
-    }
+
+        $tareas = Tarea::where('clase_id', $clase_id)->get();
+        return view('tareas.tareaIndex', compact('tareas'));
+    }*/
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($clase_id)
     {
-        return view('tareas.tareaCreate');
+        return view('tareas.tareaCreate', compact('clase_id'));
     }
 
     /**
@@ -33,12 +40,15 @@ class TareaController extends Controller
             'nombre'=>['required', 'string', 'max:50'],
             'descripcion' => 'required|string|min:10',
             'fecha_final' => 'required|date',
-            'tiempo_estimado' => 'required|numeric|min:0',
-            'estatus' => 'required', 
-            'prioridad' => 'required',
+            'clase_id' => 'required|exists:clases,id'
         ]);
+        Tarea::create($request->all());
+        $clase=Clase::findOrFail($request->clase_id);
+        
+        return redirect()->route('tareas.tareaIndex', compact('clase'));
+
         //Guardar
-        $tarea = new Tarea();
+        /*$tarea = new Tarea();
         $tarea->nombre = $request->nombre;
         $tarea->descripcion = $request->descripcion;
         $tarea->fecha_final = $request->fecha_final;
@@ -46,8 +56,7 @@ class TareaController extends Controller
         $tarea->estatus = $request->estatus;
         $tarea->prioridad = $request->prioridad;
         $tarea->save();
-        
-        return redirect()->route('tarea.index');
+        $request->merge(['clase_id']);*/
     }
 
     /**
@@ -75,17 +84,17 @@ class TareaController extends Controller
             'nombre'=>['required', 'string', 'max:50'],
             'descripcion' => 'required|string|min:10',
             'fecha_final' => 'required|date',
-            'tiempo_estimado' => 'required|numeric|min:0',
-            'estatus' => 'required', 
-            'prioridad' => 'required',
         ]);
+        /*
         $tarea->nombre = $request->nombre;
         $tarea->descripcion = $request->descripcion;
         $tarea->fecha_final = $request->fecha_final;
         $tarea->tiempo_estimado = $request->tiempo_estimado;
         $tarea->estatus = $request->estatus;
         $tarea->prioridad = $request->prioridad;
-        $tarea->save();
+        $tarea->save();*/
+
+        $tarea->update($request->all());
         
         return redirect()->route('tarea.show', $tarea);
     }
@@ -96,6 +105,21 @@ class TareaController extends Controller
     public function destroy(Tarea $tarea)
     {
         $tarea->delete();
-        return redirect()->route('tarea.index');
+        return back();
+    }
+    public function verTareas(Clase $clase)
+    {
+        $tareas=$clase->tareas()->get();
+        //dd($tareas);
+        return view('tareas.tareaIndex', compact('tareas'), compact('clase'));
+    }
+
+    public function CrearTareas($clase_id)
+    {
+        return view('tareas.tareaCreate', compact('clase_id'));
+
+        /*$tareas=$clase->tareas()->get();
+        //dd($tareas);
+        return view('tareas.tareaIndex', compact('tareas'), compact('clase'));*/
     }
 }

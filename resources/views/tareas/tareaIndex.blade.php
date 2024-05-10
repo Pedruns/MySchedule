@@ -1,18 +1,14 @@
 @extends('layouts.milayout')
 
 @section('contenido')
-    <a href="/tarea/create">Crear nueva tarea</a>
+    <a href="{{route('tareas.tareaCreate',$clase->id)}}">Crear nueva tarea</a>
     <h1>Lista de tareas</h1>
     <table>
         <thead>
             <tr>
                 <th>Nombre</th>
                 <th>Descripcion</th>
-                <th>Fecha de cierre</th>
-                <th>Tiempo estimado (horas)</th>
-                <th>Estatus</th>
-                <th>Prioridad</th>
-                <th>Acciones</th>
+                <th>Fecha final</th>
             </tr>
         </thead>
         <tbody>
@@ -21,9 +17,6 @@
                 <td>{{ $tarea->nombre }}</td>
                 <td>{{ $tarea->descripcion }}</td>
                 <td>{{ $tarea->fecha_final }}</td>
-                <td>{{ $tarea->tiempo_estimado }}</td>
-                <td>{{ $tarea->estatus }}</td>
-                <td>{{ $tarea->prioridad }}</td>
                 <td> 
                     <a href="{{ route('tarea.show', $tarea )}}">Ver</a> |
                      <a href="{{ route('tarea.edit', $tarea ) }}">Editar</a> | 

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ClaseController;
 use App\Http\Controllers\TareaController;
+use App\Models\Tarea;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +21,10 @@ Route::get('/', function () {
 });
 
 Route::resource('tarea', TareaController::class);
+Route::get('/tarea/{clase}/tareas',[TareaController::class,'verTareas'])->name('tareas.tareaIndex');
+Route::get('/tarea/{clase}/crearTarea',[TareaController::class,'CrearTareas'])->name('tareas.tareaCreate');
+
+Route::resource('clase', ClaseController::class);
 
 Route::middleware([
     'auth:sanctum',
