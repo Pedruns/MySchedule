@@ -23,6 +23,9 @@ Route::get('/', function () {
 Route::resource('tarea', TareaController::class);
 Route::get('/tarea/{clase}/tareas',[TareaController::class,'verTareas'])->name('tareas.tareaIndex');
 Route::get('/tarea/{clase}/crearTarea',[TareaController::class,'CrearTareas'])->name('tareas.tareaCreate');
+Route::get('/tarea/{clase}/{tarea}/detalle',[TareaController::class,'detalleTarea'])->name('tareas.tareaShow');
+Route::get('/tarea/{clase}/{tarea}/editar',[TareaController::class,'editarTarea'])->name('tareas.tareaUpdate');
+
 
 Route::resource('clase', ClaseController::class);
 

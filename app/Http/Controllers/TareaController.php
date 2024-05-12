@@ -59,21 +59,22 @@ class TareaController extends Controller
         $request->merge(['clase_id']);*/
     }
 
-    /**
+    /*
      * Display the specified resource.
-     */
+     * 
     public function show(Tarea $tarea)
     {
         return view('tareas.tareaShow', compact('tarea'));
-    }
+    }*/
 
-    /**
+    /*
      * Show the form for editing the specified resource.
-     */
-    public function edit(Tarea $tarea)
+     
+    public function edit(Tarea $tarea, $clase_id)
     {
-        return view('tareas.tareaUpdate', compact('tarea'));
-    }
+        return view('tareas.tareaUpdate', compact('tarea'), compact('clase_id'));
+    }*/
+    
 
     /**
      * Update the specified resource in storage.
@@ -84,6 +85,7 @@ class TareaController extends Controller
             'nombre'=>['required', 'string', 'max:50'],
             'descripcion' => 'required|string|min:10',
             'fecha_final' => 'required|date',
+            'clase_id' => 'required|exists:clases,id'
         ]);
         /*
         $tarea->nombre = $request->nombre;
@@ -95,8 +97,10 @@ class TareaController extends Controller
         $tarea->save();*/
 
         $tarea->update($request->all());
+        $clase=Clase::findOrFail($request->clase_id);
+        //route('tareas.tareaShow', compact('clase'), compact('tarea'))
         
-        return redirect()->route('tarea.show', $tarea);
+        return redirect()->route('tareas.tareaShow', [$clase, $tarea]);
     }
 
     /**
@@ -107,6 +111,7 @@ class TareaController extends Controller
         $tarea->delete();
         return back();
     }
+
     public function verTareas(Clase $clase)
     {
         $tareas=$clase->tareas()->get();
@@ -122,4 +127,17 @@ class TareaController extends Controller
         //dd($tareas);
         return view('tareas.tareaIndex', compact('tareas'), compact('clase'));*/
     }
+
+    public function detalleTarea(Clase $clase, Tarea $tarea)
+    {
+        //dd($tarea);
+        return view('tareas.tareaShow', compact('clase'), compact('tarea'));
+        
+    }
+    
+    public function editarTarea($clase_id, Tarea $tarea)
+    {
+        return view('tareas.tareaUpdate', compact('clase_id'), compact('tarea'));
+    }
+
 }

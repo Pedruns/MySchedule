@@ -1,6 +1,5 @@
-@extends('layouts.milayout')
+<x-mi-layout titulo="Crear Tarea">
 
-@section('contenido')
     <a href="/">salir</a>
     <h1>Crear nueva tarea</h1>
     @include('parciales.formError')
@@ -33,4 +32,4 @@
         </fieldset>
         <input type="submit" value="Enviar">
     </form>
-@endsection
+</x-mi-layout>

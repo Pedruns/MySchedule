@@ -1,6 +1,4 @@
-@extends('layouts.milayout')
-
-@section('contenido')
+<x-mi-layout titulo="Crear Clase">
     <a href="/">salir</a>
     <h1>Crear nueva clase</h1>
     @include('parciales.formError')
@@ -16,4 +14,4 @@
         </fieldset>
         <input type="submit" value="Enviar">
     </form>
-@endsection
+</x-mi-layout>

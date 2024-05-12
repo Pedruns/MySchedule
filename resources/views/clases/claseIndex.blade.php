@@ -1,6 +1,4 @@
-@extends('layouts.milayout')
-
-@section('contenido')
+<x-mi-layout titulo="Clases">
     <a href="/clase/create">Crear nueva clase</a>
     <h1>Lista de clases</h1>
     <table>
@@ -28,4 +26,4 @@
             @endforeach
         </tbody>
     </table>
-@endsection
+</x-mi-layout>

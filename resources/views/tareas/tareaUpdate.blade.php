@@ -1,11 +1,10 @@
-@extends('layouts.milayout')
-
-@section('contenido')
+<x-mi-layout titulo="Actualizar Tarea">
 
     @include('parciales.formError')
     <h1>Actualizar tarea</h1>
     <form action="{{ route('tarea.update', $tarea) }}" method="POST">
         @csrf 
+        <input type="hidden" name="clase_id" value="{{ $clase_id }}">
         @method('PATCH')
         <fieldset>
             <legend>Nombre</legend>
@@ -24,4 +23,4 @@
         </fieldset>
         <input type="submit" value="Enviar">
     </form>
-@endsection
+</x-mi-layout>

@@ -14,15 +14,15 @@ class ClaseController extends Controller
 
      public function __construct()
      {
-         $this->middleware('auth')->except('index', 'show');
-         // ->only()
+        $this->middleware('auth')->except('index', 'create');
      }
 
     public function index()
     {
         //$clases = Clase::all();
         $clases = Auth::user()->mis_clases;
-        return view('clases.claseIndex', compact('clases'));
+        //return view('clases.claseIndex', compact('clases'));
+        return view('clases.prueba', compact('clases'));
     }
 
     /**
@@ -51,13 +51,13 @@ class ClaseController extends Controller
         return redirect()->route('clase.index');
     }
 
-    /**
+    /*
      * Display the specified resource.
-     */
+     
     public function show(Clase $clase)
     {
         return view('tareas.tareaIndex', $clase);
-    }
+    }*/
 
     /**
      * Show the form for editing the specified resource.
@@ -76,9 +76,9 @@ class ClaseController extends Controller
             'nombre_clase'=>['required', 'string', 'max:50'],
         ]);
 
-        Clase::create($request->all());
-        
-        return redirect()->route('clase.show', $clase);
+        $clase->update($request->all());
+
+        return redirect()->route('clase.index', $clase);
 
     }
 
