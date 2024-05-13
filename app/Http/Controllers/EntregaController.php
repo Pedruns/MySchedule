@@ -8,6 +8,7 @@ use App\Models\Tarea;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class EntregaController extends Controller
 {
@@ -15,15 +16,7 @@ class EntregaController extends Controller
      {
         $this->middleware('auth');
      }
-    /*
-     * Display a listing of the resource.
-     
 
-     public function __construct()
-     {
-        $this->middleware('auth')->except('store');
-     }
-    */
     public function entregas(Tarea $tarea)
     {
         $entregas = $tarea->entregas()->get();
@@ -32,16 +25,7 @@ class EntregaController extends Controller
         return view('tareas.entregas', compact('entregas'), compact('tarea'));
     }
 
-    /*
-     * Show the form for creating a new resource.
-     
-    public function create()
-    {
-        //
-    }
 
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $entrega = new Entrega();
@@ -50,7 +34,7 @@ class EntregaController extends Controller
         $entrega->tarea_id = $request->tarea_id;
         
         if ($request->file('archivo')->isValid()) {
-            $entrega->ubicacion=$request->archivo->store('');
+            $entrega->ubicacion=$request->archivo->store('','public');
             $entrega->nombre_original = $request->archivo->getClientOriginalName();
             $entrega->mime = $request->file('archivo')->getClientMimeType();
         }
@@ -61,39 +45,11 @@ class EntregaController extends Controller
         return back();
     }
 
-    /**
-     * Display the specified resource.
-     * 
-    public function show(Entrega $entrega)
-    {
-        //
-    }
 
-     * Show the form for editing the specified resource.
-    public function edit(Entrega $entrega)
+    public function download($entregaid)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Entrega $entrega)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Entrega $entrega)
-    {
-        //
-    }
-
-    public function download(Entrega $entrega)
-    {
+        $entrega = Entrega::findOrFail($entregaid);
         return response()
-        ->download(storage_path('app/' . $entrega->ubicacion), $entrega->nombre_original);
+        ->download(storage_path('app/public/' . $entrega->ubicacion), $entrega->nombre_original);
     }
 }
