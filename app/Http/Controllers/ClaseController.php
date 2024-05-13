@@ -14,17 +14,20 @@ class ClaseController extends Controller
 
      public function __construct()
      {
-        $this->middleware('auth')->except('index', 'create');
+        $this->middleware('auth');
      }
 
     public function index()
     {
-        //$clases = Clase::all();
-        $clases = Auth::user()->mis_clases;
-        //return view('clases.claseIndex', compact('clases'));
+        $clases = Auth::user()->clases;
         return view('clases.claseIndex', compact('clases'));
     }
 
+    public function misclases()
+    {
+        $clases = Auth::user()->mis_clases;
+        return view('clases.misclases', compact('clases'));
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -42,9 +45,6 @@ class ClaseController extends Controller
             'nombre_clase'=>['required', 'string', 'max:50'],
         ]);
 
-        /*$clase = new Clase();
-        $clase->nombre_clase = $request->nombre_clase;
-        $clase->save();*/
         $request->merge(['user_id' => Auth::id()]);
         Clase::create($request->all());
         
@@ -53,11 +53,11 @@ class ClaseController extends Controller
 
     /*
      * Display the specified resource.
-     
+     */
     public function show(Clase $clase)
     {
         return view('tareas.tareaIndex', $clase);
-    }*/
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -93,17 +93,14 @@ class ClaseController extends Controller
 
     public function unirmeClase()
     {
-        $user = Auth::user();
         $clases = Clase::all();
-        dd($clases);
-        return view('clases.claseUnir', compact('clases'));
+        return view('clases.unirmeClase', compact('clases'));
     }
 
     public function relacionarClaseConUsuario(Request $request)
     {
         $clase = Clase::findOrFail($request->clase_id);
         $user_id = Auth::user()->id;
-        //$user_id = $user->id;
 
         $clase->users()->attach($user_id);
 

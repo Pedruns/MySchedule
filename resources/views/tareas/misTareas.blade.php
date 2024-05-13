@@ -1,13 +1,14 @@
 <x-mi-layout titulo="Tarea">
     <div class="container-fluid testimonial py-1">
+        <a href="{{route('tareas.tareaCreate',$clase->id)}}">Crear nueva tarea</a>
         <h1>Lista de tareas</h1>
-    </div>   
+    </div>    
         @foreach($tareas as $tarea)
         <div class="container-fluid testimonial py-1">
             <div class="container py-3">
                 <div class="testimonial-item img-border-radius bg-light rounded p-4">
                     <div class="position-relative">
-                            <a href="{{ route('tareas.tareaShow', [$clase, $tarea])}}"><div class="mb-4 d-flex align-items-center flex-nowrap">
+                            <a href="{{route('tareas.entregas', $tarea)}}"><div class="mb-4 d-flex align-items-center flex-nowrap">
                                 <div class="rounded">
                                     <img src="{{asset('assets/images/logos/actividad.png')}}" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
                                 </div>
@@ -34,9 +35,14 @@
                         <div class="mb-2 pb-1">
                             <p class="mb-0">{{ Str::limit ($tarea->descripcion, 300, '...') }}</p>
                         </div>
+                        <div class="p-1">
+                            <a href="{{ route('tareas.tareaUpdate', [$clase->id, $tarea]) }}" class="btn border border-secondary rounded-pill px-3 text-primary">Editar</a>
+                            <a href="{{route('tarea.destroy', $tarea)}}" class="btn border border-secondary rounded-pill px-3 text-primary">Eliminar</a> 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         @endforeach
+
 </x-mi-layout>

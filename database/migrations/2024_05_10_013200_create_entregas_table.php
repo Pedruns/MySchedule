@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('ubicacion');
             $table->string('mime');
             $table->string('nombre_original');
-            $table->date('fecha_entrega');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

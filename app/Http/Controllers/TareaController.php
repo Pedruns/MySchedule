@@ -9,23 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class TareaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-
-    /*public function index($clase_id)
+    public function __construct()
     {
-        $tareas = Tarea::all();
-        *$tareas = Auth::clase()->tareas;
-        return view('tareas.tareaIndex', compact('tareas'));
+        $this->middleware('auth');
+    }
 
-        $tareas = Tarea::where('clase_id', $clase_id)->get();
-        return view('tareas.tareaIndex', compact('tareas'));
-    }*/
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create($clase_id)
     {
         return view('tareas.tareaCreate', compact('clase_id'));
@@ -46,39 +35,8 @@ class TareaController extends Controller
         $clase=Clase::findOrFail($request->clase_id);
         
         return redirect()->route('tareas.tareaIndex', compact('clase'));
-
-        //Guardar
-        /*$tarea = new Tarea();
-        $tarea->nombre = $request->nombre;
-        $tarea->descripcion = $request->descripcion;
-        $tarea->fecha_final = $request->fecha_final;
-        $tarea->tiempo_estimado = $request->tiempo_estimado;
-        $tarea->estatus = $request->estatus;
-        $tarea->prioridad = $request->prioridad;
-        $tarea->save();
-        $request->merge(['clase_id']);*/
     }
 
-    /*
-     * Display the specified resource.
-     * 
-    public function show(Tarea $tarea)
-    {
-        return view('tareas.tareaShow', compact('tarea'));
-    }*/
-
-    /*
-     * Show the form for editing the specified resource.
-     
-    public function edit(Tarea $tarea, $clase_id)
-    {
-        return view('tareas.tareaUpdate', compact('tarea'), compact('clase_id'));
-    }*/
-    
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Tarea $tarea)
     {
         $request->validate([
@@ -87,25 +45,13 @@ class TareaController extends Controller
             'fecha_final' => 'required|date',
             'clase_id' => 'required|exists:clases,id'
         ]);
-        /*
-        $tarea->nombre = $request->nombre;
-        $tarea->descripcion = $request->descripcion;
-        $tarea->fecha_final = $request->fecha_final;
-        $tarea->tiempo_estimado = $request->tiempo_estimado;
-        $tarea->estatus = $request->estatus;
-        $tarea->prioridad = $request->prioridad;
-        $tarea->save();*/
 
         $tarea->update($request->all());
         $clase=Clase::findOrFail($request->clase_id);
-        //route('tareas.tareaShow', compact('clase'), compact('tarea'))
         
         return redirect()->route('tareas.tareaShow', [$clase, $tarea]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Tarea $tarea)
     {
         $tarea->delete();
@@ -115,22 +61,22 @@ class TareaController extends Controller
     public function verTareas(Clase $clase)
     {
         $tareas=$clase->tareas()->get();
-        //dd($tareas);
         return view('tareas.tareaIndex', compact('tareas'), compact('clase'));
     }
 
+    public function misTareas(Clase $clase)
+    {
+        $tareas=$clase->tareas()->get();
+        return view('tareas.misTareas', compact('tareas'), compact('clase'));
+    }
+    
     public function CrearTareas($clase_id)
     {
         return view('tareas.tareaCreate', compact('clase_id'));
-
-        /*$tareas=$clase->tareas()->get();
-        //dd($tareas);
-        return view('tareas.tareaIndex', compact('tareas'), compact('clase'));*/
     }
 
     public function detalleTarea(Clase $clase, Tarea $tarea)
     {
-        //dd($tarea);
         return view('tareas.tareaShow', compact('clase'), compact('tarea'));
         
     }

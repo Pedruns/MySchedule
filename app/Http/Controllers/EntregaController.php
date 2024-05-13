@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Clase;
 use App\Models\Entrega;
 use App\Models\Tarea;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EntregaController extends Controller
 {
+    public function __construct()
+     {
+        $this->middleware('auth');
+     }
     /*
      * Display a listing of the resource.
      
@@ -17,12 +23,16 @@ class EntregaController extends Controller
      {
         $this->middleware('auth')->except('store');
      }
-    public function index()
+    */
+    public function entregas(Tarea $tarea)
     {
-        //
+        $entregas = $tarea->entregas()->get();
+        //$entregas = Entrega::all();
+        //dd($entregas);
+        return view('tareas.entregas', compact('entregas'), compact('tarea'));
     }
 
-    
+    /*
      * Show the form for creating a new resource.
      
     public function create()
@@ -38,19 +48,17 @@ class EntregaController extends Controller
 
         $entrega->user_id = Auth::id();
         $entrega->tarea_id = $request->tarea_id;
-        $tarea = Tarea::findOrFail($request->tarea_id);
-        $clase = Clase::findOrFail($tarea->clase_id);
         
-        if ($request->file('archivo')->isValid() && $request->file('pdf')->isValid()) {
-            $entrega->ubicacion=$request->archivo->store('archivos_entregas'),
-            $entrega->nombre_original = $request->archivo->getClientOriginalName(),
-            $entrega->mime = $request->file('archivo')->getClientMimeType()
+        if ($request->file('archivo')->isValid()) {
+            $entrega->ubicacion=$request->archivo->store('');
+            $entrega->nombre_original = $request->archivo->getClientOriginalName();
+            $entrega->mime = $request->file('archivo')->getClientMimeType();
         }
 
         $entrega->save();
         // Redireccionar
 
-        return redirect()->route('tareas.tareaShow', [$clase, $tarea]);
+        return back();
     }
 
     /**
@@ -81,5 +89,11 @@ class EntregaController extends Controller
     public function destroy(Entrega $entrega)
     {
         //
+    }
+
+    public function download(Entrega $entrega)
+    {
+        return response()
+        ->download(storage_path('app/' . $entrega->ubicacion), $entrega->nombre_original);
     }
 }

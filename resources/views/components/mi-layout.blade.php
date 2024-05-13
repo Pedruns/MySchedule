@@ -49,15 +49,15 @@
                 <span>
                   <i class="ti ti-article"></i>
                 </span>
-                <span class="hide-menu">Ver clases</span>
+                <span class="hide-menu">Clases</span>
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="/clase/create" aria-expanded="false">
+              <a class="sidebar-link" href="/misclases" aria-expanded="false">
                 <span>
                   <i class="ti ti-alert-circle"></i>
                 </span>
-                <span class="hide-menu">Crear clase</span>
+                <span class="hide-menu">Mis Clases</span>
               </a>
             </li>
             <li class="nav-small-cap">
@@ -120,9 +120,6 @@
                       <i class="ti ti-user fs-6"></i>
                       <p class="mb-0 fs-3">My Profile</p>
                     </a>
-                    <a href="/tarea" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-list-check fs-6"></i>
-                      <p class="mb-0 fs-3">My Task</p>
                       <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

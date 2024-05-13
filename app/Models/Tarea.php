@@ -17,8 +17,8 @@ class Tarea extends Model
     {
         return $this->belongsTo(Clase::class);
     }
-    public function entrega()
+    public function entregas()
     {
-        return $this->belongsTo(Entrega::class);
+        return $this->hasMany(Entrega::class);
     }
 }

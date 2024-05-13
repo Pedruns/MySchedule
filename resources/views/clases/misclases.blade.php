@@ -1,4 +1,5 @@
 <x-mi-layout titulo="Clases">
+    
     <div class="navbar-collapse justify-content-start px-0" id="navbarNav">
         <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-start">
         <li class="nav-item dropdown">
@@ -29,17 +30,33 @@
                             @foreach($clases as $clase)
                                     @if($contador % 2 == 0)
                                         <div class="col-md-6 col-lg-6 col-xl-4">
-                                            <a href="{{ route('tareas.tareaIndex', $clase )}}"><img src="{{asset('assets/images/logos/placeholder.jpg')}}" width="415" height="200" class="img-fluid w-100 rounded-top"></a>
+                                            <a href="{{ route('tareas.misTareas', $clase )}}"><img src="{{asset('assets/images/logos/placeholder.jpg')}}" width="415" height="200" class="img-fluid w-100 rounded-top"></a>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                 <h4>{{$clase->nombre_clase}}</h4>
+                                                <div class="btn-group" role="group">
+                                                    <a href="{{ route('clase.edit', $clase ) }}" class="btn border border-secondary rounded-pill px-3 text-primary">Editar</a>
+                                                    <form action="{{route('clase.destroy', $clase)}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <input type="submit" value="Eliminar" class="btn border border-secondary rounded-pill px-3 text-primary">
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     @endif
                                     @if($contador % 2 == 1)
                                         <div class="col-md-6 col-lg-6 col-xl-4">
-                                            <a href="{{ route('tareas.tareaIndex', $clase )}}"><img src="{{asset('assets/images/logos/placeholder.jpg')}}" width="415" height="200" class="img-fluid w-100 rounded-top"></a>
+                                            <a href="{{ route('tareas.misTareas', $clase )}}"><img src="{{asset('assets/images/logos/placeholder.jpg')}}" width="415" height="200" class="img-fluid w-100 rounded-top"></a>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                 <h4>{{$clase->nombre_clase}}</h4>
+                                                <div class="btn-group" role="group">
+                                                    <a href="{{ route('clase.edit', $clase ) }}" class="btn border border-secondary rounded-pill px-3 text-primary">Editar</a>
+                                                    <form action="{{route('clase.destroy', $clase)}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <input type="submit" value="Eliminar" class="btn border border-secondary rounded-pill px-3 text-primary">
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     @endif
