@@ -22,7 +22,7 @@ class ClaseController extends Controller
         //$clases = Clase::all();
         $clases = Auth::user()->mis_clases;
         //return view('clases.claseIndex', compact('clases'));
-        return view('clases.prueba', compact('clases'));
+        return view('clases.claseIndex', compact('clases'));
     }
 
     /**
@@ -90,4 +90,25 @@ class ClaseController extends Controller
         $clase->delete();
         return redirect()->route('clase.index');
     }
+
+    public function unirmeClase()
+    {
+        $user = Auth::user();
+        $clases = Clase::all();
+        dd($clases);
+        return view('clases.claseUnir', compact('clases'));
+    }
+
+    public function relacionarClaseConUsuario(Request $request)
+    {
+        $clase = Clase::findOrFail($request->clase_id);
+        $user_id = Auth::user()->id;
+        //$user_id = $user->id;
+
+        $clase->users()->attach($user_id);
+
+        return redirect()->route('clase.index');
+    }
+    
+
 }

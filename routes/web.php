@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ClaseController;
+use App\Http\Controllers\EntregaController;
 use App\Http\Controllers\TareaController;
+use App\Models\Entrega;
 use App\Models\Tarea;
 use Illuminate\Support\Facades\Route;
 
@@ -27,7 +29,14 @@ Route::get('/tarea/{clase}/{tarea}/detalle',[TareaController::class,'detalleTare
 Route::get('/tarea/{clase}/{tarea}/editar',[TareaController::class,'editarTarea'])->name('tareas.tareaUpdate');
 
 
+
 Route::resource('clase', ClaseController::class);
+
+Route::get('/clase/unirme_clase', [ClaseController::class, 'unirmeClase'])->name('clases.claseUnir');
+Route::post('/alumno/relacionarClase', [ClaseController::class, 'relacionarClaseConUsuario'])->name('clases.relacionarClaseConUsuario');
+//Route::get('/clase/unir',[ClaseController::class,'unirmeClase'])->name('clases.claseUnir');
+
+Route::resource('entrega', EntregaController::class);
 
 Route::middleware([
     'auth:sanctum',

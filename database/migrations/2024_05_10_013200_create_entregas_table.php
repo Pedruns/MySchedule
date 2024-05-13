@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('tarea_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('ubicacion');
+            $table->string('mime');
+            $table->string('nombre_original');
             $table->date('fecha_entrega');
             $table->timestamps();
         });

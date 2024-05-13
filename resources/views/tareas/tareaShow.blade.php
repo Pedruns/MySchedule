@@ -24,7 +24,16 @@
                                     <div class="mb-4">
                                     <h4>Añadir Entrega</h4>
                                     <!-- Formulario para entregas -->
-                                    <input type="file" id="picRecipe" name="picRecipe">
+                                        
+                                        <form action="{{route('entrega.store')}}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <input type="hidden" name="tarea_id" value="{{ $tarea->id }}">
+                                            <br>
+                                            <hr>
+                                            <input type="file" name="archivo">
+                                            <br>
+                                            <input type="submit" value="Enviar" class="btn border border-secondary rounded-pill px-3 text-primary">
+                                        </form>
                                     </div>
                                 </div>
                             </div>
